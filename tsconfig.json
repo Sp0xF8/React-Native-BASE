@@ -1,3 +1,9 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json"
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".", // Base directory to resolve non-relative module names
+    "paths": {
+      "@src/*": ["src/*"] // Mapping the alias to the folder path
+    }
+  }
 }
