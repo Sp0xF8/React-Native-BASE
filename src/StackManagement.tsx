@@ -8,18 +8,22 @@ import { NavigationContainer } from '@react-navigation/native';
 const RootNav = createNativeStackNavigator();
 const MainNav = createMaterialTopTabNavigator();
 
-import LoginScreen from '@src/screens/login_screen';
+import LoginScreen from './screens/login_screen';
 
-import MeetScreen from '@src/screens/meet_screen';
-import ChatScreen from '@src/screens/chat_screen';
-import ProfileScreen from '@src/screens/profile_screen';
+import MeetScreen from './screens/meet_screen';
+import ChatScreen from './screens/chat_screen';
+import ProfileScreen from './screens/profile_screen';
 
+
+import { UserProvider, UserContext } from './contexts/LoginManager'
 
 
 function LoggedInNavigation(): React.JSX.Element  {
     return (
-        <MainNav.Navigator initialRouteName='Login'>
-            <MainNav.Screen name="Login" component={LoginScreen} />
+        <MainNav.Navigator initialRouteName='Meet'>
+            <MainNav.Screen name="Meet" component={MeetScreen} />
+            <MainNav.Screen name="Chat" component={ChatScreen} />
+            <MainNav.Screen name="Profile" component={ProfileScreen} />
         </MainNav.Navigator>
     );
 }
@@ -32,3 +36,18 @@ function RootStackNavigation(): React.JSX.Element  {
         </RootNav.Navigator>
     );
 }
+
+
+//default function with login provider and a check if the user element is null, if it is display the root stack, otherwise display logged in
+function StackManagement(): React.JSX.Element {
+    const { user } = useContext(UserContext);
+    return (
+        <UserProvider>
+            <NavigationContainer>
+                {user ? <LoggedInNavigation /> : <RootStackNavigation />}
+            </NavigationContainer>
+        </UserProvider>
+    );
+}
+
+export default StackManagement;

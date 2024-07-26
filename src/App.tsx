@@ -2,19 +2,15 @@ import React from 'react';
 import {Text, View} from 'react-native';
 
 
-
+import StackManager from './StackManagement';
+import { ThemeProvider } from './contexts/ThemeManager';
 
 
 function App(): React.JSX.Element {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <Text>Try editing me! </Text>
-    </View>
+    <ThemeProvider>
+      <StackManager/>
+    </ThemeProvider>
   );
 }
 
