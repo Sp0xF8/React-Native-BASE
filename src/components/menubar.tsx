@@ -4,8 +4,8 @@ import { useNavigation, useNavigationState } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StackActions } from '@react-navigation/native';
-import { ThemeContext } from '@src/contexts/ThemeManager';
-import { ColourSchemes } from '@src/stylesheets/ColourSchemes';
+import { ThemeContext } from '../contexts/ThemeManager';
+import { ColourSchemes } from '../stylesheets/ColourSchemes';
 
 const Taskbar = () => {
 	

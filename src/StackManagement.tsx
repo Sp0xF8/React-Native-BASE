@@ -15,12 +15,15 @@ import ChatScreen from './screens/chat_screen';
 import ProfileScreen from './screens/profile_screen';
 
 
-import { UserProvider, UserContext } from './contexts/LoginManager'
+import { UserContext } from './contexts/LoginManager'
 
 
 function LoggedInNavigation(): React.JSX.Element  {
     return (
-        <MainNav.Navigator initialRouteName='Meet'>
+        <MainNav.Navigator 
+            initialRouteName='Meet'
+            tabBarPosition='bottom'
+        >
             <MainNav.Screen name="Meet" component={MeetScreen} />
             <MainNav.Screen name="Chat" component={ChatScreen} />
             <MainNav.Screen name="Profile" component={ProfileScreen} />
@@ -32,7 +35,7 @@ function LoggedInNavigation(): React.JSX.Element  {
 function RootStackNavigation(): React.JSX.Element  {
     return (
         <RootNav.Navigator initialRouteName='Login'>
-            <RootNav.Screen name="Login" component={LoginScreen} />
+            <RootNav.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         </RootNav.Navigator>
     );
 }
@@ -42,11 +45,9 @@ function RootStackNavigation(): React.JSX.Element  {
 function StackManagement(): React.JSX.Element {
     const { user } = useContext(UserContext);
     return (
-        <UserProvider>
             <NavigationContainer>
                 {user ? <LoggedInNavigation /> : <RootStackNavigation />}
             </NavigationContainer>
-        </UserProvider>
     );
 }
 
