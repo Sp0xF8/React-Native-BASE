@@ -4,6 +4,8 @@ import { View, StyleSheet} from 'react-native';
 import { Text, Button, Switch, ButtonProps } from 'react-native-paper';
 
 import { ThemeContext } from '../contexts/ThemeManager';
+import { UserContext } from '../contexts/LoginManager';
+
 import { ColourSchemes } from '../stylesheets/ColourSchemes';
 
 
@@ -67,6 +69,18 @@ function SettingsButton(props: SettingsButtonProps): React.JSX.Element {
 
 function SettingsScreen(): React.JSX.Element {
   const {theme, toggleTheme} = React.useContext(ThemeContext)
+  const {user, Logout} = React.useContext(UserContext)
+
+
+  const handle_logout = () => {
+    console.log('Logging out')
+    //logout with callback
+    Logout((message:string) => {
+      console.log(message);
+    })
+  }
+
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: theme === 'dark' ? ColourSchemes.dark.background : ColourSchemes.light.background}}>
 
@@ -96,7 +110,7 @@ function SettingsScreen(): React.JSX.Element {
           rippleColor={[ColourSchemes.dark.accent, ColourSchemes.light.accent_secondary]}
           textColor={[ColourSchemes.dark.text, ColourSchemes.light.text]} 
           vMargin={20}
-          onPress_={() => {console.log('Logout')}}
+          onPress_={handle_logout}
         />
         
 

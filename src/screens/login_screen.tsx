@@ -53,8 +53,8 @@ function LoginScreen(): React.JSX.Element {
 						{
 							backgroundColor: theme === 'dark' ? ColourSchemes.dark.middleground : ColourSchemes.light.middleground,
 							color: theme === 'dark' ? ColourSchemes.dark.success : ColourSchemes.light.success,
-							borderColor: activeInput === 1 ? theme === 'dark' ? ColourSchemes.dark.accent_secondary : ColourSchemes.light.accent_secondary : theme === 'dark' ? ColourSchemes.dark.middleground : ColourSchemes.light.middleground,
-							borderWidth: activeInput === 1 ? 1 : 0,
+							borderColor: activeInput === 1 ? theme === 'dark' ? ColourSchemes.dark.accent_secondary : ColourSchemes.light.success : theme === 'dark' ? ColourSchemes.dark.middleground : ColourSchemes.light.middleground,
+							borderWidth: activeInput === 1 ? 2 : 0,
 						}
 					]}
 					placeholder="JohnDoe@gmail.com"
@@ -77,8 +77,9 @@ function LoginScreen(): React.JSX.Element {
 						{
 							backgroundColor: theme === 'dark' ? ColourSchemes.dark.middleground : ColourSchemes.light.middleground,
 							color: theme === 'dark' ? ColourSchemes.dark.success : ColourSchemes.light.success,
-							borderColor: activeInput === 2 ? theme === 'dark' ? ColourSchemes.dark.accent_secondary : ColourSchemes.light.accent_secondary : theme === 'dark' ? ColourSchemes.dark.middleground : ColourSchemes.light.middleground,
-							borderWidth: activeInput === 2 ? 1 : 0,
+							// if the current text input is active ? add a border : no border
+							borderColor: activeInput === 2 ? theme === 'dark' ? ColourSchemes.dark.accent_secondary : ColourSchemes.light.success : theme === 'dark' ? ColourSchemes.dark.middleground : ColourSchemes.light.middleground,
+							borderWidth: activeInput === 2 ? 2 : 0,
 						}
 					]}
 					placeholder="Password"
