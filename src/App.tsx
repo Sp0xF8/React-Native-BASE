@@ -6,14 +6,18 @@ import StackManager from './StackManagement';
 import { ThemeProvider } from './contexts/ThemeManager';
 import { UserProvider } from './contexts/LoginManager';
 
+//safe area provider
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 function App(): React.JSX.Element {
   return (
-    <ThemeProvider>
-      <UserProvider>
-        <StackManager/>
-      </UserProvider>
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider>
+        <UserProvider>
+          <StackManager/>
+        </UserProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
 

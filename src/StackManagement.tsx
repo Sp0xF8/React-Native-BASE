@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-
+import { MaterialTopTabBarProps } from '@react-navigation/material-top-tabs';
 
 const RootNav = createNativeStackNavigator();
 const MainNav = createMaterialTopTabNavigator();
@@ -17,12 +17,21 @@ import ProfileScreen from './screens/profile_screen';
 
 import { UserContext } from './contexts/LoginManager'
 
+import CustomHeadder from './components/appbar'
+
 
 function LoggedInNavigation(): React.JSX.Element  {
     return (
+        
+        
         <MainNav.Navigator 
             initialRouteName='Meet'
             tabBarPosition='bottom'
+            tabBar={(props: MaterialTopTabBarProps) => {
+    
+                return <CustomHeadder {...props} />;
+            }}
+                
         >
             <MainNav.Screen name="Meet" component={MeetScreen} />
             <MainNav.Screen name="Chat" component={ChatScreen} />
