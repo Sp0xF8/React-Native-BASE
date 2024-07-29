@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
 
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { createMaterialTopTabNavigator, MaterialTopTabBarProps } from '@react-navigation/material-top-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
-import { MaterialTopTabBarProps } from '@react-navigation/material-top-tabs';
 
 const RootNav = createNativeStackNavigator();
 const MainNav = createMaterialTopTabNavigator();
@@ -37,7 +36,7 @@ function LoggedInNavigation(): React.JSX.Element  {
                 return <CustomHeadder {...props} />;
             }}
         >
-            <MainNav.Screen name="Meet" component={MeetScreen} />
+            <MainNav.Screen name="Meet" component={MeetScreen} options={{}} />
             <MainNav.Screen name="Chat" component={ChatScreen} />
             <MainNav.Screen name="Profile" component={ProfileScreen} />
         </MainNav.Navigator>
@@ -47,7 +46,11 @@ function LoggedInNavigation(): React.JSX.Element  {
 
 function RootStackNavigation(): React.JSX.Element  {
     return (
-        <RootNav.Navigator initialRouteName='Login'>
+        <RootNav.Navigator initialRouteName='Login' 
+            screenOptions={{
+                gestureEnabled: false, // Disable back swipe gesture for all screens in the stack
+            }}
+        >
             <RootNav.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         </RootNav.Navigator>
     );
@@ -81,7 +84,8 @@ function StackManagement(): React.JSX.Element {
 
     return (
         <View style={{flex:1, backgroundColor: theme === 'dark' ? ColourSchemes.dark.background : ColourSchemes.light.background}}>
-            <NavigationContainer >
+            <NavigationContainer 
+            >
                 {user ? <LoggedInNavigation /> : <RootStackNavigation />}
             </NavigationContainer>
         </View>

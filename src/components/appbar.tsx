@@ -6,10 +6,11 @@ import { Appbar, Text, TouchableRipple, Icon } from 'react-native-paper';
 
 import { MaterialTopTabBarProps } from '@react-navigation/material-top-tabs';
 
-
+import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 
 import { ThemeContext, ThemeSwitcher } from '../contexts/ThemeManager';
 import { ColourSchemes } from '../stylesheets/ColourSchemes';
+import Animated, { runOnJS, useSharedValue } from 'react-native-reanimated';
 
 export default function CustomNavigationBar(props:MaterialTopTabBarProps): React.JSX.Element  {
 
@@ -78,9 +79,49 @@ export default function CustomNavigationBar(props:MaterialTopTabBarProps): React
     
   }, [title]);
 
+  const startPositon = useSharedValue<[number,number]>([0,0])
 
 
-  console.log(props.descriptors[props.state.routes[props.state.index].key].route.name)
+  const navigateOnSwipe = (direction: 'left' | 'right') => {
+    switch (title) {
+      case 'Meet':
+        if (direction === 'right') {
+          props.navigation.navigate('Chat');
+        }
+        break;
+      case 'Chat':
+        if (direction === 'right') {
+          props.navigation.navigate('Profile');
+        } else if (direction === 'left') {
+          props.navigation.navigate('Meet');
+        }
+        break;
+      case 'Profile':
+        if (direction === 'left') {
+          props.navigation.navigate('Chat');
+        }
+        break;
+    }
+  };
+
+  const swiper = Gesture.Pan()
+    .onStart(({ x, y }) => {
+      'worklet';
+      startPositon.value = [x, y];
+    })
+    .onEnd(({ x, y }) => {
+      'worklet';
+      let swipeDirection = 'none';
+
+      if (x < startPositon.value[0]) {
+        runOnJS(navigateOnSwipe)('right');
+      } else if (x > startPositon.value[0]) {
+        runOnJS(navigateOnSwipe)('left');
+      }
+
+      startPositon.value = [0, 0];
+    });
+
   return (
       <View style={styles.appbar} ref={appbarRef}>
         <TouchableRipple
@@ -125,6 +166,10 @@ export default function CustomNavigationBar(props:MaterialTopTabBarProps): React
             <Icon source="account-edit" size={profileIconSize} color={ThemeSwitcher("text", theme)} />
           </View>
         </TouchableRipple>
+
+        <GestureDetector gesture={swiper}>
+          <Animated.View style={styles.gestureBox} />
+        </GestureDetector>
         
       </View>
   );
@@ -157,6 +202,12 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'center',
+  },
+  gestureBox:{
+    position: 'absolute',
+    width: '100%',
+    height:50,
+
   }
 });
 

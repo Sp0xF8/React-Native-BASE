@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import {Text, View} from 'react-native';
 
 
@@ -8,16 +8,22 @@ import { UserProvider } from './contexts/LoginManager';
 
 //safe area provider
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+
 
 function App(): React.JSX.Element {
+
   return (
-    <SafeAreaProvider>
-      <ThemeProvider>
-        <UserProvider>
-          <StackManager/>
-        </UserProvider>
-      </ThemeProvider>
-    </SafeAreaProvider>
+    <GestureHandlerRootView>
+      <SafeAreaProvider>
+        <ThemeProvider>
+          <UserProvider>
+            <StackManager/>
+          </UserProvider>
+        </ThemeProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
 
