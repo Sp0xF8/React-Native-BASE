@@ -3,16 +3,18 @@ import { View, StyleSheet} from 'react-native';
 
 import { Text, Button, Switch, ButtonProps } from 'react-native-paper';
 
-import { ThemeContext } from '../contexts/ThemeManager';
+import { ThemeContext, ThemeSwitcher } from '../contexts/ThemeManager';
 import { UserContext } from '../contexts/LoginManager';
 
 import { ColourSchemes } from '../stylesheets/ColourSchemes';
+
+import SettingsHeadder from '../components/settings_headder';
 
 
 //create an interface for props consisting of a setting title, and function for the onValueChange
 interface SettingToggleProps {
   title: string,
-  theme: string,
+  theme: 'light' | 'dark',
   value: any,
   vMargin: number,
   onVal: () => void
@@ -22,14 +24,14 @@ interface SettingToggleProps {
 //create a functional component that takes in the props interface
 function SettingToggle(props: SettingToggleProps): React.JSX.Element {
   return (
-    <View style={[styles.settingsItemContainer, {backgroundColor: props.theme === 'dark' ? ColourSchemes.dark.foreground : ColourSchemes.light.foreground, marginVertical: props.vMargin}]}>
-      <Text style={[styles.settingsItem, { color: props.theme === 'dark' ? ColourSchemes.dark.text : ColourSchemes.light.text }]}>{props.title}</Text>
+    <View style={[styles.settingsItemContainer, {backgroundColor: ThemeSwitcher('foreground', props.theme), marginVertical: props.vMargin}]}>
+      <Text style={[styles.settingsItem, { color: ThemeSwitcher('text', props.theme) }]}>{props.title}</Text>
       <Switch 
         id={props.title}
         value={props.value} 
         onValueChange={props.onVal}  
         trackColor={{false: ColourSchemes.light.accent_secondary, true: ColourSchemes.dark.accent_secondary}}
-        thumbColor={props.theme === 'dark' ? ColourSchemes.dark.accent : ColourSchemes.light.accent}
+        thumbColor={ThemeSwitcher('accent', props.theme)}
       />
     </View>
   )
@@ -83,6 +85,7 @@ function SettingsScreen(): React.JSX.Element {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: theme === 'dark' ? ColourSchemes.dark.background : ColourSchemes.light.background}}>
+      <SettingsHeadder />
 
       <View style={[styles.settingsContainer, {backgroundColor: theme === 'dark' ? ColourSchemes.dark.middleground : ColourSchemes.light.middleground}]}>
 

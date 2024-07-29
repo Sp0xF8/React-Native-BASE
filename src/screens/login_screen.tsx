@@ -5,7 +5,7 @@ import { Button, Text } from 'react-native-paper';
 
 import { ColourSchemes } from '../stylesheets/ColourSchemes';
 
-import { ThemeContext } from '../contexts/ThemeManager';
+import { ThemeContext, ThemeSwitcher } from '../contexts/ThemeManager';
 import { UserContext } from '../contexts/LoginManager'
 
 // import Login from '../scripts/login';
@@ -36,13 +36,13 @@ function LoginScreen(): React.JSX.Element {
 			<View
 				style={[
 					styles.container, 
-					{backgroundColor: theme === 'dark' ? ColourSchemes.dark.background : ColourSchemes.light.background}
+					{backgroundColor: ThemeSwitcher('background', theme)}
 				]}
 			>
 
 
 
-				<Text style={{ color: theme === 'dark' ? ColourSchemes.dark.text : ColourSchemes.light.text, fontSize:24 }}>
+				<Text style={{ color: ThemeSwitcher('text', theme), fontSize:24 }}>
 					Welcome to the Login Screen!
 				</Text>
 
@@ -51,9 +51,9 @@ function LoginScreen(): React.JSX.Element {
 					style={[
 						styles.textInput,
 						{
-							backgroundColor: theme === 'dark' ? ColourSchemes.dark.middleground : ColourSchemes.light.middleground,
-							color: theme === 'dark' ? ColourSchemes.dark.success : ColourSchemes.light.success,
-							borderColor: activeInput === 1 ? theme === 'dark' ? ColourSchemes.dark.accent_secondary : ColourSchemes.light.success : theme === 'dark' ? ColourSchemes.dark.middleground : ColourSchemes.light.middleground,
+							backgroundColor: ThemeSwitcher('middleground', theme),
+							color: ThemeSwitcher('success', theme),
+							borderColor: activeInput === 1 ? ThemeSwitcher(['accent_secondary','success'], theme) : ThemeSwitcher('middleground', theme),
 							borderWidth: activeInput === 1 ? 2 : 0,
 						}
 					]}
@@ -75,10 +75,10 @@ function LoginScreen(): React.JSX.Element {
 					style={[
 						styles.textInput,
 						{
-							backgroundColor: theme === 'dark' ? ColourSchemes.dark.middleground : ColourSchemes.light.middleground,
-							color: theme === 'dark' ? ColourSchemes.dark.success : ColourSchemes.light.success,
+							backgroundColor: ThemeSwitcher('middleground', theme),
+							color: ThemeSwitcher('success', theme),
 							// if the current text input is active ? add a border : no border
-							borderColor: activeInput === 2 ? theme === 'dark' ? ColourSchemes.dark.accent_secondary : ColourSchemes.light.success : theme === 'dark' ? ColourSchemes.dark.middleground : ColourSchemes.light.middleground,
+							borderColor: activeInput === 2 ? ThemeSwitcher(['accent_secondary','success'], theme) : ThemeSwitcher('middleground', theme),
 							borderWidth: activeInput === 2 ? 2 : 0,
 						}
 					]}
@@ -100,32 +100,32 @@ function LoginScreen(): React.JSX.Element {
 
 				<Button
 					mode="contained"
-					rippleColor={theme === 'dark' ? ColourSchemes.dark.foreground : ColourSchemes.light.foreground}
+					rippleColor={ThemeSwitcher('foreground', theme)}
 					onPress={handleLogin}
 					style={[
 						styles.button,
 						{
-							backgroundColor: theme === 'dark' ? ColourSchemes.dark.middleground : ColourSchemes.light.middleground,
+							backgroundColor: ThemeSwitcher('middleground', theme),
 						}
 					]}
 				>
-					<Text style={[ { color: theme === 'dark' ? ColourSchemes.dark.text : ColourSchemes.light.text, fontSize: 20, fontWeight:'bold' }]}>
+					<Text style={[ { color: ThemeSwitcher('text', theme), fontSize: 20, fontWeight:'bold' }]}>
 						Login
 					</Text>
 				</Button>
 
 				<Button
 					mode="contained"
-					rippleColor={theme === 'dark' ? ColourSchemes.dark.foreground : ColourSchemes.light.foreground}
+					rippleColor={ThemeSwitcher('foreground', theme)}
 					onPress={() => console.log('SignUp')}
 					style={[
 						styles.button,
 						{
-							backgroundColor: theme === 'dark' ? ColourSchemes.dark.middleground : ColourSchemes.light.middleground,
+							backgroundColor: ThemeSwitcher('middleground', theme),
 						}
 					]}
 				>
-					<Text style={[ { color: theme === 'dark' ? ColourSchemes.dark.text : ColourSchemes.light.text, fontSize: 20, fontWeight:'bold' }]}>
+					<Text style={[ { color: ThemeSwitcher('text', theme), fontSize: 20, fontWeight:'bold' }]}>
 						Sign-Up
 					</Text>
 				</Button>

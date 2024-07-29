@@ -27,3 +27,7 @@ export const ColourSchemes = {
     light: light_theme,
     dark: dark_theme
 }
+
+
+//export a type with all labels for colours
+export type TColourScheme = keyof typeof dark_theme;
