@@ -6,10 +6,11 @@ import { Button } from 'react-native-paper';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
-import { ThemeContext  } from '../contexts/ThemeManager';
+import { ThemeContext, ThemeSwitcher  } from '../contexts/ThemeManager';
 import { ColourSchemes } from '../stylesheets/ColourSchemes';
 
 import ProfileHeadder from '../components/profile_headder'
+
 
 import SettingsScreen from './settings_screen';
 
@@ -17,13 +18,15 @@ function ProfileScreen(): React.JSX.Element {
   const { theme } = React.useContext(ThemeContext)
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: theme === 'dark' ? ColourSchemes.dark.background : ColourSchemes.light.background }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: ThemeSwitcher('background', theme)}}>
 
       <ProfileHeadder />
 
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: theme === 'dark' ? ColourSchemes.dark.background : ColourSchemes.light.background }}>
-        <	Text style={{ color: theme === 'dark' ? ColourSchemes.dark.text : ColourSchemes.light.text }}>Profile Screen</Text>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: ThemeSwitcher('background', theme) }}>
+        <	Text style={{ color: ThemeSwitcher('text', theme) }}>Profile Screen</Text>
       </View>
+
+
 
 
     </View>
@@ -69,8 +72,8 @@ function ProfileNavigatorStack(): React.JSX.Element {
 
   return (
       <Stack.Navigator initialRouteName='Profile' >
-        <Stack.Screen name='ProfileScreen' component={ProfileScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name='SettingsScreen' component={SettingsScreen} />
+        <Stack.Screen name='ProfileScreen' component={ProfileScreen} options={{ headerShown: false }} />
+        <Stack.Screen name='SettingsScreen' component={SettingsScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
   );
 }

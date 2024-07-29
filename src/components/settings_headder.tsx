@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { ThemeContext, ThemeSwitcher } from '../contexts/ThemeManager'
 import { ColourSchemes } from '../stylesheets/ColourSchemes';
 
-const ProfileHeadder = () => {
+const SettingsHeadder = () => {
 	const navigation = useNavigation();
 
 	const { theme } = React.useContext(ThemeContext);
@@ -15,20 +15,23 @@ const ProfileHeadder = () => {
 	return (
 		<View style={[styles.taskbarContainer, { backgroundColor: ThemeSwitcher('middleground', theme) }]}>
 
-			<Text style={[styles.textText, { color: ThemeSwitcher('text', theme), paddingLeft:5 }]}>
-				Profile
-			</Text>
-
 			<TouchableOpacity
 				style={[styles.button, { backgroundColor: ThemeSwitcher('foreground', theme) }]}
-				onPress={() => navigation.navigate('SettingsScreen')}>
+				onPress={() => navigation.goBack()}
+			>
 
 				{/* <Text style={[styles.textText, { color: theme === 'dark' ? ColourSchemes.dark.text : ColourSchemes.light.text }]}>
 					Settings
 				</Text> */}
-				<Icon name="cogs" size={24} color={ThemeSwitcher('text', theme)} style={{ padding: 10 }} />
+				<Icon name="arrow-left" size={24} color={ThemeSwitcher('text', theme)} style={{ padding: 10 }} />
 
 			</TouchableOpacity>
+
+
+			<Text style={[styles.textText, { color: ThemeSwitcher('text', theme), paddingLeft:5 }]}>
+				Settings
+			</Text>
+
 
 		</View>
 	);
@@ -60,4 +63,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default ProfileHeadder;
+export default SettingsHeadder;

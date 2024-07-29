@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { useColorScheme } from 'react-native';
 
+import { ColourSchemes, TColourScheme } from '../stylesheets/ColourSchemes'
+
 
 
 interface ThemeContextProps {
@@ -39,4 +41,20 @@ const useTheme = (): ThemeContextProps => {
   return context;
 };
 
-export { ThemeProvider, useTheme, ThemeContext };
+
+
+
+const ThemeSwitcher = (colors: [TColourScheme, TColourScheme] | TColourScheme, theme: 'light' | 'dark') => {
+  
+
+  let color;
+  if (Array.isArray(colors)) {
+    color = theme === 'dark' ? ColourSchemes.dark[colors[0]] : ColourSchemes.light[colors[1]];
+  } else {
+    color = theme === 'dark' ? ColourSchemes.dark[colors] : ColourSchemes.light[colors];
+  }
+
+  return color;
+}
+
+export { ThemeProvider, useTheme, ThemeContext, ThemeSwitcher};
