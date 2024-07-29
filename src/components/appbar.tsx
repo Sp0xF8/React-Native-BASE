@@ -124,52 +124,54 @@ export default function CustomNavigationBar(props:MaterialTopTabBarProps): React
 
   return (
       <View style={styles.appbar} ref={appbarRef}>
-        <TouchableRipple
-          style={[styles.touchable_ripple, {borderTopLeftRadius:10}]}
-          onPress={() => {
-            props.navigation.navigate('Meet');
-          }}
-          
-        >
-          <View style={styles.view}>
-            <Text style={[styles.text ,{color: ThemeSwitcher("text", theme)}]} ref={meetTextRef}>
-              Meet
-            </Text>
-            <Icon source="account-heart" size={meetIconSize} color={ThemeSwitcher("text", theme)} />
-          </View>
-        </TouchableRipple>
-
-        <TouchableRipple
-          style={styles.touchable_ripple}
-          onPress={() => {
-            props.navigation.navigate('Chat');
-          }}
-        >
-          <View style={styles.view}>
-            <Text style={[styles.text ,{color: ThemeSwitcher("text", theme)}]} ref={chatTextRef} >
-              Chat
-            </Text>
-            <Icon source="comment"  size={chatIconSize} color={ThemeSwitcher("text", theme)} />
-          </View>
-        </TouchableRipple>
-
-        <TouchableRipple
-          style={[styles.touchable_ripple, {borderTopRightRadius:10}]}
-          onPress={() => {
-            props.navigation.navigate('Profile');
-          }}
-        >
-          <View  style={styles.view}>
-            <Text style={[styles.text ,{color: ThemeSwitcher("text", theme)}]} ref={profileTextRef}>
-              Profile
-            </Text>
-            <Icon source="account-edit" size={profileIconSize} color={ThemeSwitcher("text", theme)} />
-          </View>
-        </TouchableRipple>
-
         <GestureDetector gesture={swiper}>
-          <Animated.View style={styles.gestureBox} />
+          <Animated.View style={styles.gestureBox}>
+            <TouchableRipple
+              style={[styles.touchable_ripple, {borderTopLeftRadius:10}]}
+              onPress={() => {
+                props.navigation.navigate('Meet');
+              }}
+              
+            >
+              <View style={styles.view}>
+                <Text style={[styles.text ,{color: ThemeSwitcher("text", theme)}]} ref={meetTextRef}>
+                  Meet
+                </Text>
+                <Icon source="account-heart" size={meetIconSize} color={ThemeSwitcher("text", theme)} />
+              </View>
+            </TouchableRipple>
+
+            <TouchableRipple
+              style={styles.touchable_ripple}
+              onPress={() => {
+                props.navigation.navigate('Chat');
+              }}
+            >
+              <View style={styles.view}>
+                <Text style={[styles.text ,{color: ThemeSwitcher("text", theme)}]} ref={chatTextRef} >
+                  Chat
+                </Text>
+                <Icon source="comment"  size={chatIconSize} color={ThemeSwitcher("text", theme)} />
+              </View>
+            </TouchableRipple>
+
+            <TouchableRipple
+              style={[styles.touchable_ripple, {borderTopRightRadius:10}]}
+              onPress={() => {
+                props.navigation.navigate('Profile');
+              }}
+            >
+              <View  style={styles.view}>
+                <Text style={[styles.text ,{color: ThemeSwitcher("text", theme)}]} ref={profileTextRef}>
+                  Profile
+                </Text>
+                <Icon source="account-edit" size={profileIconSize} color={ThemeSwitcher("text", theme)} />
+              </View>
+            </TouchableRipple>
+          </Animated.View>
         </GestureDetector>
+        
+
         
       </View>
   );
@@ -207,6 +209,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height:50,
+    flexDirection:'row'
 
   }
 });
