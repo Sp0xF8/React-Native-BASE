@@ -8,6 +8,8 @@ import { ThemeContext, ThemeSwitcher } from '../contexts/ThemeManager'
 
 import { TouchableRipple, Text } from 'react-native-paper';
 
+import Animated from 'react-native-reanimated';
+
 
 const ProfileCardActionBar = () => {
 	const navigation = useNavigation();
@@ -46,8 +48,6 @@ const ProfileCardActionBar = () => {
 };
 
 
-
-
 const ProfileCard = () => {
 	const navigation = useNavigation();
 
@@ -55,10 +55,10 @@ const ProfileCard = () => {
 
 	return (
 		<View style={[styles.CardContainer, { backgroundColor: ThemeSwitcher('middleground', theme) }]}>
-			<ScrollView>
+			<Animated.ScrollView>
 
 				
-			</ScrollView>
+			</Animated.ScrollView>
 			<ProfileCardActionBar />
 		</View>
 	);
