@@ -15,7 +15,8 @@ function MeetScreen(): React.JSX.Element {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: ThemeSwitcher('background', theme)
+          backgroundColor: ThemeSwitcher('background', theme),
+          padding:20
 
         }}>
         <ProfileCard />

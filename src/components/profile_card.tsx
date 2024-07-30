@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, ScrollView, View } from 'react-native';
+import { StyleSheet, ScrollView, View, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -8,8 +8,10 @@ import { ThemeContext, ThemeSwitcher } from '../contexts/ThemeManager'
 
 import { TouchableRipple, Text } from 'react-native-paper';
 
-import Animated from 'react-native-reanimated';
+import Animated, { useAnimatedRef, useAnimatedStyle, interpolate} from 'react-native-reanimated';
 
+import ImageCarosel from './image_carosel';
+import { Image } from 'react-native-reanimated/lib/typescript/Animated';
 
 const ProfileCardActionBar = () => {
 	const navigation = useNavigation();
@@ -54,9 +56,12 @@ const ProfileCard = () => {
 	const { theme } = React.useContext(ThemeContext);
 
 	return (
-		<View style={[styles.CardContainer, { backgroundColor: ThemeSwitcher('middleground', theme) }]}>
-			<Animated.ScrollView>
+		<View style={[styles.CardContainer, { backgroundColor: ThemeSwitcher('middleground', theme), overflow:'hidden' }]}>
+			<Animated.ScrollView style={styles.cardScroll}>
+				<View>
 
+				<ImageCarosel images={[require('C:/Dev/Projects/Personal/LearningV2/src/public/mockProfiles/duaLipa1.jpg'), require('C:/Dev/Projects/Personal/LearningV2/src/public/mockProfiles/duaLipa2.jpg')]} />
+				</View>
 				
 			</Animated.ScrollView>
 			<ProfileCardActionBar />
@@ -66,12 +71,11 @@ const ProfileCard = () => {
 
 const styles = StyleSheet.create({
 	CardContainer: {
-		width: '95%',
+		width: '100%',
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
 		flexDirection: 'column',
-		marginVertical:10,
 		borderRadius:10,
 	},
 	ProfileCardActionBarContainer: {
@@ -104,6 +108,20 @@ const styles = StyleSheet.create({
 		flex:1,
 		flexDirection: 'row',
 		padding: 2,
+	},
+	ImageCaroselStyle: {
+		width: '100%',
+		flex:1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		flexDirection: 'row',
+		borderRadius:10,
+		backgroundColor:'#fff',
+	},
+	cardScroll: {
+		width: '100%',
+		flex: 1,
+		flexDirection: 'row',
 	}
 });
 
